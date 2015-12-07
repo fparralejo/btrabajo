@@ -59,15 +59,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ URL::asset('main') }}">SGSI</a>
+          <a class="navbar-brand" href="{{ URL::asset('main') }}">Trabajo</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{ URL::asset('md/main') }}">Mantenimiento de Datos</a></li>
-            <li><a onclick="#">Consultas de Datos</a></li>
-            <li><a onclick="#">Valoraciones de Activos y Riesgos</a></li>
-            <li><a href="#">Aplicación de Controles</a></li>
-            <li><a href="#">Registro incidencias</a></li>
+            <li><a href="{{ URL::asset('md/main') }}">Ofertas</a></li>
+            <li><a onclick="#">Seguimiento</a></li>
+            <li><a onclick="#">Entrevistas</a></li>
+            <li><a href="#">Tareas</a></li>
             <li><a href="{{ URL::asset('logout') }}">Salir</a></li>
           </ul>
         </div>
@@ -78,11 +77,10 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::asset('md/main') }}">Mantenimiento de Datos</a></li>
-            <li><a onclick="#">Consultas de Datos</a></li>
-            <li><a onclick="#">Valoraciones de Activos y Riesgos</a></li>
-            <li><a href="#">Aplicación de Controles</a></li>
-            <li><a href="#">Registro incidencias</a></li>
+            <li><a href="{{ URL::asset('md/main') }}">Ofertas</a></li>
+            <li><a onclick="#">Seguimiento</a></li>
+            <li><a onclick="#">Entrevistas</a></li>
+            <li><a href="#">Tareas</a></li>
             <li><a href="{{ URL::asset('logout') }}">Salir</a></li>
           </ul>
         </div>

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login SGSI</title>
+    <title>Buscar Trabajo</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ URL::asset('css/bootstrap.min.css')}}" rel="stylesheet">
@@ -31,8 +31,7 @@
 
     <div id="container">
     <div id="logo">
-    	<img src="{{ URL::asset('img/logo-Qualidad.JPG') }}">
-	    <span style="color:#FFFFFF;"><center><h2>SGSI</h2></center></span>	
+        <span style="color:#FFFFFF;"><center><h2>Trabajo</h2></center></span>	
     </div>
 
     <div id="loginbox" class="wrapper">          

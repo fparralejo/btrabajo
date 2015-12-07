@@ -2,11 +2,11 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class tbActivos extends Model {
+class oferta extends Model {
 
-	protected $table = 'tbactivos';
+	protected $table = 'ofertas';
 
-	protected $primaryKey = "Id";
+	protected $primaryKey = "id_oferta";
 
 	public $timestamps = false;
 

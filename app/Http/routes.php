@@ -30,7 +30,7 @@ Route::get('/', function()
 Route::post('login', 'loginController@login');
 
 
-Route::get('main', 'loginController@main');
+Route::get('main', 'ofertasController@main');
 /*Route::get('main', function()
 {	
     return View::make('main');
@@ -55,3 +55,5 @@ Route::get('md/mAmenazas/delete', 'mantenimientosController@mAmenazasDelete');
 Route::get('md/mActAmen', 'mantenimientosController@mActAmen');
 Route::post('md/mActAmen', 'mantenimientosController@mActAmenEdit');
 Route::get('md/mActAmen/show', 'mantenimientosController@mActAmenShow');
+
+//NUEVO
