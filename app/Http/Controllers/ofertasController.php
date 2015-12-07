@@ -90,16 +90,16 @@ class ofertasController extends Controller {
 	}
 
 
-	public function main_NO()
-	{
-        //control de sesion
-		$login = new loginController();
-        if (!$login->getControl()) {
-        	return redirect('/')->with('login_errors', '<font color="#ff0000">La sesión a expirado. Vuelva a logearse..</font>');
-        }
-
-		return view('md.main'); 
-	}
+//	public function main_NO()
+//	{
+//        //control de sesion
+//		$login = new loginController();
+//        if (!$login->getControl()) {
+//        	return redirect('/')->with('login_errors', '<font color="#ff0000">La sesión a expirado. Vuelva a logearse..</font>');
+//        }
+//
+//		return view('md.main'); 
+//	}
 
         //OK
 	public function main()
@@ -110,59 +110,122 @@ class ofertasController extends Controller {
                 return redirect('/')->with('login_errors', '<font color="#ff0000">La sesión a expirado. Vuelva a logearse..</font>');
             }
             
-            $listCriConf = \DB::select("SELECT CR.IdCriterio FROM tbcodigo C INNER JOIN tbcriterios CR ON C.IdCodigo=CR.Codigo");
+            $listado = \DB::table('ofertas')->where("id_usuario","=",Session::get('id'))
+                                            ->where("estado","=","1")
+                                            ->get();
+            //var_dump($listado);die;
+            return view('main')->with('listado',$listado); 
+        }
+
+        //OK
+	public function ofertasShow()
+        {
+            $oferta = oferta::find(Input::get('id_oferta'));
+
+            //devuelvo la respuesta al send
+            echo json_encode($oferta);
+        }
+
+        //OK
+	public function ofertasDelete(){
+            $oferta = oferta::find(Input::get('id_oferta'));
+            $IdOferta = $oferta->id_oferta;
+
+            $oferta->estado = "0";
+
+            if($oferta->save()){
+                echo "Oferta ". $IdOferta ." borrada correctamente.";
+            }else{
+                echo "Oferta ". $IdOferta ." NO ha sido borrada.";
+            }
+	}
+        
+        //OK
+        public function ofertasCreateEdit(Request $request){
+            //si es nuevo este valor viene vacio
+            //var_dump($request);die;
+            if($request->id_oferta === ""){
+                $oferta = new oferta();
+                $ok = 'Se ha dado de alta correctamente la oferta.';
+                $error = 'ERROR al dar de alta la oferta.';
+            }
+            //sino se edita este id_oferta
+            else{
+                $oferta = oferta::find($request->id_oferta);
+                $ok = 'Se ha editado correctamente la oferta.';
+                $error = 'ERROR al edtar la oferta.';
+            }
+
+            $oferta->id_oferta = $request->id_oferta;
+            $oferta->oferta = $request->oferta;
+            $oferta->descripcion = $request->descripcion;
+            $oferta->empresa = $request->empresa;
+            $oferta->telefono = $request->telefono;
+            $oferta->email = $request->email;
+            $oferta->url = $request->url;
+            $oferta->tipo_contrato = $request->tipo_contrato;
+            $oferta->duracion = $request->duracion;
+            $oferta->jornada = $request->jornada;
+            $oferta->salario = $request->salario;
+            $oferta->fecha = $request->fecha;
+            $oferta->id_usuario = Session::get('id');
+            $oferta->estado = "1";
+
+            //var_dump($oferta);die;
             
-            
-            
-            
+            if($oferta->save()){
+                return redirect('ofertas')->with('errors', $ok);
+            }else{
+                return redirect('ofertas')->with('errors', $error);
+            }
         }
         
         
-	public function mActivos()
-	{
-        //control de sesion
-		$login = new loginController();
-        if (!$login->getControl()) {
-        	return redirect('/')->with('login_errors', '<font color="#ff0000">La sesión a expirado. Vuelva a logearse..</font>');
-        }
+//	public function mActivos()
+//	{
+//        //control de sesion
+//		$login = new loginController();
+//        if (!$login->getControl()) {
+//        	return redirect('/')->with('login_errors', '<font color="#ff0000">La sesión a expirado. Vuelva a logearse..</font>');
+//        }
+//
+//		$listado = tbActivos::all();
+//		$listLocalizacion = tbLocalizacion::all();
+//		$listCategorias = tbCategorias::all();
+//		$listDepartamentos = tbDepartamentos::all();
+//		$listTipo = tbTipo::all();
+//		$listPropietarios = tbPropietarios::all();
+//		$listPadre = tbPadre::all();
+//		$listConfidencialidad = tbConfidencialidad::all();
+//		$listDisponibilidad = tbDisponibilidad::all();
+//		$listIntegridad = tbIntegridad::all();
+//
+//		$listCriConf = \DB::select("SELECT CR.IdCriterio FROM tbcodigo C INNER JOIN tbcriterios CR ON C.IdCodigo=CR.Codigo");
+//		$listCriterio = \DB::select("SELECT CR.IdCriterio, CR.Descripcion, C.Codigo FROM tbcodigo C INNER JOIN tbcriterios CR ON C.IdCodigo=CR.Codigo");
+//		return view('md.mActivos')->with('listado',$listado)->with('listLocalizacion',$listLocalizacion)
+//								  ->with('listCategorias',$listCategorias)->with('listDepartamentos',$listDepartamentos)
+//								  ->with('listTipo',$listTipo)->with('listPropietarios',$listPropietarios)
+//								  ->with('listPadre',$listPadre)->with('listConfidencialidad',$listConfidencialidad)
+//								  ->with('listCriConf',$listCriConf)->with('listCriterio',$listCriterio)
+//								  ->with('listDisponibilidad',$listDisponibilidad)->with('listIntegridad',$listIntegridad); 
+//	}
 
-		$listado = tbActivos::all();
-		$listLocalizacion = tbLocalizacion::all();
-		$listCategorias = tbCategorias::all();
-		$listDepartamentos = tbDepartamentos::all();
-		$listTipo = tbTipo::all();
-		$listPropietarios = tbPropietarios::all();
-		$listPadre = tbPadre::all();
-		$listConfidencialidad = tbConfidencialidad::all();
-		$listDisponibilidad = tbDisponibilidad::all();
-		$listIntegridad = tbIntegridad::all();
+//	public function mActivosShow(){
+//		$activo = tbActivos::find(Input::get('Id'));
+//
+//		//devuelvo la respuesta al send
+//		echo json_encode($activo);
+//	}
 
-		$listCriConf = \DB::select("SELECT CR.IdCriterio FROM tbcodigo C INNER JOIN tbcriterios CR ON C.IdCodigo=CR.Codigo");
-		$listCriterio = \DB::select("SELECT CR.IdCriterio, CR.Descripcion, C.Codigo FROM tbcodigo C INNER JOIN tbcriterios CR ON C.IdCodigo=CR.Codigo");
-		return view('md.mActivos')->with('listado',$listado)->with('listLocalizacion',$listLocalizacion)
-								  ->with('listCategorias',$listCategorias)->with('listDepartamentos',$listDepartamentos)
-								  ->with('listTipo',$listTipo)->with('listPropietarios',$listPropietarios)
-								  ->with('listPadre',$listPadre)->with('listConfidencialidad',$listConfidencialidad)
-								  ->with('listCriConf',$listCriConf)->with('listCriterio',$listCriterio)
-								  ->with('listDisponibilidad',$listDisponibilidad)->with('listIntegridad',$listIntegridad); 
-	}
-
-	public function mActivosShow(){
-		$activo = tbActivos::find(Input::get('Id'));
-
-		//devuelvo la respuesta al send
-		echo json_encode($activo);
-	}
-
-	public function mActivosDelete(){
-		$activo = tbActivos::find(Input::get('Id'));
-		$IdActivo = $activo->IdActivo;
-
-		$activo->delete();
-
-		//devuelvo la respuesta al send
-		echo "Activo ". $IdActivo ." borrado correctamente.";
-	}
+//	public function mActivosDelete(){
+//		$activo = tbActivos::find(Input::get('Id'));
+//		$IdActivo = $activo->IdActivo;
+//
+//		$activo->delete();
+//
+//		//devuelvo la respuesta al send
+//		echo "Activo ". $IdActivo ." borrado correctamente.";
+//	}
 
 	public function mActivosCreateEdit(Request $request){
 		//si es nuevo este valor viene vacio

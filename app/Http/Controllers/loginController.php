@@ -108,7 +108,7 @@ class loginController extends Controller {
             Session::put('rol', $encontrado[0]->rol);
 
 
-            return redirect('main');
+            return redirect('ofertas');
         } else {
             return redirect('/')->with('login_errors', '<font color="#ff0000">Email o contraseña incorrectas.</font>');
         }

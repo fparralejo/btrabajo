@@ -30,7 +30,13 @@ Route::get('/', function()
 Route::post('login', 'loginController@login');
 
 
-Route::get('main', 'ofertasController@main');
+Route::get('ofertas', 'ofertasController@main');
+Route::get('ofertas/show', 'ofertasController@ofertasShow');
+Route::get('ofertas/delete', 'ofertasController@ofertasDelete');
+Route::post('ofertas', 'ofertasController@ofertasCreateEdit');
+//Route::post('main', 'ofertasController@main');
+
+
 /*Route::get('main', function()
 {	
     return View::make('main');

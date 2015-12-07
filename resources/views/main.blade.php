@@ -2,7 +2,7 @@
 
 
 @section('principal')
-<h1 class="page-header">Buscar Trabajo</h1>
+<h2 class="page-header">Buscar Trabajo</h2>
 
 <style>
     .sgsiRow:hover{
@@ -28,6 +28,11 @@
             "bSort":true,
             "aaSorting": [[ 0, "asc" ]],
             "aoColumns": [
+//                { "sType": 'string' },
+                { "sType": 'string' },
+                { "sType": 'string' },
+                { "sType": 'string' },
+                { "sType": 'string' },
                 { "sType": 'string' },
                 { "sType": 'string' },
                 { "sType": 'string' },
@@ -42,54 +47,45 @@
         });
 	} );
 
-	function cambioCriterio(objeto,CriConf2){
-		objeto.value = CriConf2.value;
+//	function cambioCriterio(objeto,CriConf2){
+//		objeto.value = CriConf2.value;
+//
+//	}
 
-	}
-
-	function leerActivo(Id){
+	function leerOferta(id_oferta){
         $.ajax({
-          data:{"Id":Id},  
-          url: '{{ URL::asset("md/mActivos/show") }}',
+          data:{"id_oferta":id_oferta},  
+          url: '{{ URL::asset("ofertas/show") }}',
           type:"get",
           success: function(data) {
-            var activo = JSON.parse(data);
-            $('#IdActivo').val(activo.IdActivo);
-            $('#Nombre').val(activo.Nombre);
-            $('#Referencia').val(activo.Referencia);
-            $('#Unidades').val(activo.Unidades);
-            $('#Marca').val(activo.Marca);
-            $('#Modelo').val(activo.Modelo);
-            $("#Localizacion").val(activo.Localizacion);
-            $("#Descripcion").val(activo.Descripcion);
-            $("#Observaciones").val(activo.Observaciones);
-            $("#Categoria").val(activo.Categoria);
-            $("#Tipo").val(activo.Tipo);
-            $("#Propietario").val(activo.Propietario);
-            $("#Padre").val(activo.Padre);
-            $("#Confidencialidad").val(activo.Confidencialidad);
-            $("#CriConf").val(activo.CriterioConfidencialidad);
-            $("#CriConf2").val(activo.CriterioConfidencialidad);
-            $("#Disponibilidad").val(activo.Disponibilidad);
-            $("#CriDisp").val(activo.CriterioDisponibilidad);
-            $("#CriDisp2").val(activo.CriterioDisponibilidad);
-            $("#Integridad").val(activo.Integridad);
-            $("#CriInt").val(activo.CriterioIntegridad);
-            $("#CriInt2").val(activo.CriterioIntegridad);
+            var oferta = JSON.parse(data);
+            $('#id_oferta').val(oferta.id_oferta);
+            $('#oferta').val(oferta.oferta);
+            $('#descripcion').val(oferta.descripcion);
+            $('#empresa').val(oferta.empresa);
+            $('#telefono').val(oferta.telefono);
+            $('#email').val(oferta.email);
+            $("#url").val(oferta.url);
+            $("#tipo_contrato").val(oferta.tipo_contrato);
+            $("#duracion").val(oferta.duracion);
+            $("#jornada").val(oferta.jornada);
+            $("#salario").val(oferta.salario);
+            $("#fecha").val(oferta.fecha);
             //cambiar nombre del titulo del formulario
             $("#tituloForm").html('Editar Datos');
             $("#submitir").val('OK');
-            $("#Id").val(activo.Id);
+            //$("#id_oferta").val(oferta.id_oferta);
+            //$("#id_usuario").val(oferta.id_usuario);
           }
         });
 	}
 
-	function borrarActivo(Id){
-        if (confirm("¿Desea borrar el activo?"))
+	function borrarOferta(id_oferta){
+        if (confirm("¿Desea borrar la oferta?"))
         {
 	        $.ajax({
-	          data:{"Id":Id},  
-	          url: '{{ URL::asset("md/mActivos/delete") }}',
+	          data:{"id_oferta":id_oferta},  
+	          url: '{{ URL::asset("ofertas/delete") }}',
 	          type:"get",
 	          success: function(data) {
 	          	$('#accionTabla').html(data);
@@ -98,7 +94,7 @@
 	        });
 	        setTimeout(function ()
 	        {
-	            document.location.href="{{URL::to('md/mActivos')}}";
+	            document.location.href="{{URL::to('ofertas')}}";
 	        }, 1000);
         }
 	}
@@ -124,44 +120,49 @@
 @endif
 
 <table id="ejemplo1" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-	<thead>
-		<tr>
-			<th>IdOferta</th>
-			<th>Oferta</th>
-			<th>Descripción</th>
-			<th>Empresa</th>
-			<th>Telefono</th>
-			<th>E-mail</th>
-			<th>url</th>
-			<th>Tipo</th>
-			<th>Duracion</th>
-			<th>Jornada</th>
-			<th>Salario</th>
-			<th>Fecha</th>
-			<th></th>
-			</tr>
-		</thead>
-		<tbody>
-		@foreach ($listado as $activo)
-		<?php
-		//carga los datos en el formulario para editarlos
-        $url="javascript:leerActivo('$activo->Id');";
-		?>
-			<tr>
-				<td class="sgsiRow" onClick="{{ $url }}">{{ $activo->IdActivo }}</td>
-				<td class="sgsiRow" onClick="{{ $url }}">{{ $activo->Nombre }}</td>
-				<td class="sgsiRow" onClick="{{ $url }}">{{ $activo->Referencia }}</td>
-				<td class="sgsiRow" onClick="{{ $url }}">{{ $activo->Unidades }}</td>
-				<td class="sgsiRow" onClick="{{ $url }}">{{ $activo->Marca }}</td>
-				<td class="sgsiRow" onClick="{{ $url }}">{{ $activo->Modelo }}</td>
-				<td class="sgsiRow" onClick="{{ $url }}">{{ $activo->Localizacion }}</td>
-				<td>
-					<button type="button" onclick="borrarActivo({{$activo->Id}})" class="btn btn-xs btn-danger">Borrar</button>
-				</td>
-			</tr>
-		@endforeach
-		</tbody>
-	</table>
+    <thead>
+        <tr>
+            <!--<th>IdOferta</th>-->
+            <th>Oferta</th>
+            <th>Descripción</th>
+            <th>Empresa</th>
+            <th>Telefono</th>
+            <th>E-mail</th>
+            <th>url</th>
+            <th>Tipo</th>
+            <th>Duracion</th>
+            <th>Jornada</th>
+            <th>Salario</th>
+            <th>Fecha</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach ($listado as $oferta)
+    <?php
+    //carga los datos en el formulario para editarlos
+    $url="javascript:leerOferta('$oferta->id_oferta');";
+    ?>
+        <tr>
+<!--            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->id_oferta }}</td>-->
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->oferta }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->descripcion }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->empresa }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->telefono }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->email }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->url }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->tipo_contrato }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->duracion }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->jornada }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->salario }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->fecha }}</td>
+            <td>
+                <button type="button" onclick="borrarOferta({{ $oferta->id_oferta }})" class="btn btn-xs btn-danger">Borrar</button>
+            </td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
 
 <hr/>
 <h3><span id="tituloForm">Nuevos Datos</span></h3>
@@ -175,212 +176,112 @@
 }
 </style>
 
-<form role="form" class="form-horizontal" id="productForm" name="productForm" action="{{ URL::asset('md/mActivos') }}" method="post">
+<form role="form" class="form-horizontal" id="productForm" name="productForm" action="{{ URL::asset('ofertas') }}" method="post">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-	<div class="row">
-		<div class="col-md-2">
-		  <div class="form-group">
-		    <label for="IdActivo">IdActivo:</label><input type="text" class="form-control" id="IdActivo" name="IdActivo" maxlength="3">
-		  </div>
-	    </div>
+<!--    <div class="row">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="id_oferta">Id Oferta:</label><input type="text" class="form-control" id="id_oferta" name="id_oferta" maxlength="4">
+            </div>
+        </div>
+    </div>-->
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="oferta">Oferta:</label><input type="text" class="form-control" id="oferta" name="oferta" maxlength="255">
+            </div>
+        </div>
     </div>
 
-	<div class="row">
-		<div class="col-md-8">
-		  <div class="form-group">
-		    <label for="Nombre">Nombre:</label><input type="text" class="form-control" id="Nombre" name="Nombre" maxlength="255">
-		  </div>
-	    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="descripcion">Descripcion:</label>
+                <textarea class="form-control" rows="2" name="descripcion" id="descripcion"></textarea>
+            </div>
+        </div>
     </div>
 
-	<div class="row">
-		<div class="col-md-4">
-		  <div class="form-group">
-		    <label for="Referencia">Referencia:</label><input type="text" class="form-control" id="Referencia" name="Referencia" maxlength="50">
-		  </div>
-	    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="empresa">Empresa:</label><input type="text" class="form-control" id="empresa" name="empresa" maxlength="50">
+            </div>
+        </div>
     </div>
 
-	<div class="row">
-		<div class="col-md-2">
-		  <div class="form-group">
-		    <label for="Unidades">Unidades:</label><input type="text" class="form-control" id="Unidades" name="Unidades" maxlength="11">
-		  </div>
-	    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="telefono">Telefono:</label><input type="text" class="form-control" id="telefono" name="telefono" maxlength="50">
+            </div>
+        </div>
     </div>
 
-	<div class="row">
-		<div class="col-md-4">
-		  <div class="form-group">
-		    <label for="Marca">Marca:</label><input type="text" class="form-control" id="Marca" name="Marca" maxlength="50">
-		  </div>
-	    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="email">Email:</label><input type="text" class="form-control" id="email" name="email" maxlength="50">
+            </div>
+        </div>
     </div>
 
-	<div class="row">
-		<div class="col-md-4">
-		  <div class="form-group">
-		    <label for="Modelo">Modelo:</label><input type="text" class="form-control" id="Modelo" name="Modelo" maxlength="50">
-		  </div>
-	    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="url">url:</label><input type="text" class="form-control" id="url" name="url" maxlength="50">
+            </div>
+        </div>
     </div>
 
-	<div class="row">
-		<div class="col-md-4">
-			<label for="Localización">Localización</label>
-	        <select class="form-control" id="Localizacion" name="Localizacion">
-	        @foreach ($listLocalizacion as $localizacion)
-		        <option value="{{ $localizacion->IdLocalizacion }}">{{ $localizacion->Localizacion }}</option>
-	        @endforeach
-	        </select>
-	    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="tipo_contrato">tipo_contrato:</label><input type="text" class="form-control" id="tipo_contrato" name="tipo_contrato" maxlength="50">
+            </div>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="duracion">duracion:</label><input type="text" class="form-control" id="duracion" name="duracion" maxlength="50">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="jornada">jornada:</label><input type="text" class="form-control" id="jornada" name="jornada" maxlength="50">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="salario">salario:</label><input type="text" class="form-control" id="salario" name="salario" maxlength="50">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="fecha">fecha:</label><input type="text" class="form-control" id="fecha" name="fecha" maxlength="50">
+            </div>
+        </div>
+    </div>
+
     <br/>
 
-	<div class="row">
-		<div class="col-md-6">
-		  <div class="form-group">
-		    <label for="Descripcion">Descripcion:</label>
-		    <textarea class="form-control" rows="2" name="Descripcion" id="Descripcion"></textarea>
-		  </div>
-	    </div>
-    </div>
-
-	<div class="row">
-		<div class="col-md-6">
-		  <div class="form-group">
-		    <label for="Observaciones">Observaciones:</label>
-		    <textarea class="form-control" rows="2" name="Observaciones" id="Observaciones"></textarea>
-		  </div>
-	    </div>
-    </div>
-
-	<div class="row">
-		<div class="col-md-4 jumbotron">
-			<label for="Categoria">Categoría:</label>
-	        <select class="form-control" name="Categoria" id="Categoria">
-	        @foreach ($listCategorias as $categoria)
-		        <option value="{{ $categoria->IdCategoria }}">{{ $categoria->Categoria }}</option>
-	        @endforeach
-	        </select>
-	        <br/>
-			<label for="Departamento">Departamento:</label>
-	        <select class="form-control" name="Departamento" id="Departamento">
-	        @foreach ($listDepartamentos as $departamento)
-		        <option value="{{ $departamento->IdDepartamento }}">{{ $departamento->Departamento }}</option>
-	        @endforeach
-	        </select>
-	        <br/>
-			<label for="Tipo">Tipo:</label>
-	        <select class="form-control" name="Tipo" id="Tipo">
-	        @foreach ($listTipo as $tipo)
-		        <option value="{{ $tipo->IdTipo }}">{{ $tipo->Tipo }}</option>
-	        @endforeach
-	        </select>
-	        <br/>
-	        <br/>
-			<label for="Propietario">Propietario:</label>
-	        <select class="form-control" name="Propietario" id="Propietario">
-	        @foreach ($listPropietarios as $propietario)
-		        <option value="{{ $propietario->IdPropietario }}">{{ $propietario->Propietario }}</option>
-	        @endforeach
-	        </select>
-	        <br/>
-			<label for="Padre">Padre:</label>
-	        <select class="form-control" name="Padre" id="Padre">
-	        @foreach ($listPadre as $padre)
-		        <option value="{{ $padre->IdPadre }}">{{ $padre->Padre }}</option>
-	        @endforeach
-	        </select>
-	    </div>
-
-		<div class="col-md-2"></div>
 
 
-		<div class="col-md-6 jumbotron">
-			<label for="Confidencialidad">Confidencialidad:</label>
-	        <select class="form-control" name="Confidencialidad" id="Confidencialidad">
-	        @foreach ($listConfidencialidad as $confidencialidad)
-		        <option value="{{ $confidencialidad->IdConfidencialidad }}">{{ $confidencialidad->Descripcion }}</option>
-	        @endforeach
-	        </select>
-	        <br/>
-			<div class="col-md-2">
-		   	    <div class="form-group">
-				    <label for="CriConf">Criterio:</label>
-				    <input type="text" class="form-control" 
-							id="CriConf" name="CriConf" value="00" readonly>
-				</div>
-			</div>
-
-	        <br/>
-			<label for="CriConf2"></label>
-	        <select class="form-control" id="CriConf2" name="CriConf2" onchange="cambioCriterio(document.productForm.CriConf,this);">
-	        @foreach ($listCriterio as $criterio)
-		        <option value="{{ $criterio->IdCriterio }}">{{ $criterio->Descripcion }} - {{ $criterio->Codigo }}</option>
-	        @endforeach
-	        </select>
-	    </div>
-
-		<div class="col-md-2"></div>
-
-		<div class="col-md-6 jumbotron">
-			<label for="Disponibilidad">Disponibilidad:</label>
-	        <select class="form-control" name="Disponibilidad" id="Disponibilidad">
-	        @foreach ($listDisponibilidad as $disponibilidad)
-		        <option value="{{ $disponibilidad->IdDisponibilidad }}">{{ $disponibilidad->Descripcion }}</option>
-	        @endforeach
-	        </select>
-	        <br/>
-			<div class="col-md-2">
-		   	    <div class="form-group">
-				    <label for="CriDisp">Criterio:</label>
-				    <input type="text" class="form-control" 
-							id="CriDisp" name="CriDisp" value="00" readonly>
-				</div>
-			</div>
-
-	        <br/>
-			<label for="CriDisp2"></label>
-	        <select class="form-control" id="CriDisp2" name="CriDisp2" onchange="cambioCriterio(document.productForm.CriDisp,this);">
-	        @foreach ($listCriterio as $criterio)
-		        <option value="{{ $criterio->IdCriterio }}">{{ $criterio->Descripcion }} - {{ $criterio->Codigo }}</option>
-	        @endforeach
-	        </select>
-	    </div>
-
-		<div class="col-md-6"></div>
-
-		<div class="col-md-6 jumbotron">
-			<label for="Integridad">Integridad:</label>
-	        <select class="form-control" name="Integridad" id="Integridad">
-	        @foreach ($listIntegridad as $integridad)
-		        <option value="{{ $integridad->IdIntegridad }}">{{ $integridad->Descripcion }}</option>
-	        @endforeach
-	        </select>
-	        <br/>
-			<div class="col-md-2">
-		   	    <div class="form-group">
-				    <label for="CriInt">Criterio:</label>
-				    <input type="text" class="form-control" 
-							id="CriInt" name="CriInt" value="00" readonly>
-				</div>
-			</div>
-
-	        <br/>
-			<label for="CriDisp2"></label>
-	        <select class="form-control" id="CriInt2" name="CriInt2" onchange="cambioCriterio(document.productForm.CriInt,this);">
-	        @foreach ($listCriterio as $criterio)
-		        <option value="{{ $criterio->IdCriterio }}">{{ $criterio->Descripcion }} - {{ $criterio->Codigo }}</option>
-	        @endforeach
-	        </select>
-	    </div>
-
-    </div>
-
-
-    <input type="hidden" id="Id" name="Id" value="" />
+    <input type="hidden" id="id_oferta" name="id_oferta" value="" />
+    <input type="hidden" id="id_usuario" name="id_usuario" value="{{ Session::get('id') }}" />
     <input type="submit" id="submitir" class="btn btn-default" value="Nuevo"/>
 </form>
 
@@ -394,30 +295,34 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            IdActivo: {
+            id_oferta: {
                 validators: {
                     notEmpty: {
-                        message: 'El IdActivo es requerido'
+                        message: 'El Id Oferta es requerido'
                     },
                     numeric: {
-                        message: 'El IdActivo tiene que ser un valor numérico'
+                        message: 'El Id Oferta tiene que ser un valor numérico'
                     }
                 }
             },
-            Nombre: {
+            oferta: {
                 validators: {
                     notEmpty: {
-                        message: 'El Nombre es requerido'
+                        message: 'La Oferta de trabajo es requerida'
                     }
                 }
             },
-            Unidades: {
+            descripcion: {
                 validators: {
                     notEmpty: {
-                        message: 'Las Unidades es requerida'
-                    },
-                    integer: {
-                        message: 'Las Unidades tiene que ser un valor numérico'
+                        message: 'La descripción de trabajo es requerida'
+                    }
+                }
+            },
+            empresa: {
+                validators: {
+                    notEmpty: {
+                        message: 'La empresa de trabajo es requerida'
                     }
                 }
             }

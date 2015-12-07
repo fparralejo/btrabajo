@@ -63,7 +63,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{ URL::asset('md/main') }}">Ofertas</a></li>
+            <li><a href="{{ URL::asset('ofertas') }}">Ofertas</a></li>
             <li><a onclick="#">Seguimiento</a></li>
             <li><a onclick="#">Entrevistas</a></li>
             <li><a href="#">Tareas</a></li>
@@ -77,7 +77,7 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::asset('md/main') }}">Ofertas</a></li>
+            <li><a href="{{ URL::asset('ofertas') }}">Ofertas</a></li>
             <li><a onclick="#">Seguimiento</a></li>
             <li><a onclick="#">Entrevistas</a></li>
             <li><a href="#">Tareas</a></li>
