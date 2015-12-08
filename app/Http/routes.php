@@ -34,16 +34,12 @@ Route::get('ofertas', 'ofertasController@main');
 Route::get('ofertas/show', 'ofertasController@ofertasShow');
 Route::get('ofertas/delete', 'ofertasController@ofertasDelete');
 Route::post('ofertas', 'ofertasController@ofertasCreateEdit');
-//Route::post('main', 'ofertasController@main');
-
-
-/*Route::get('main', function()
-{	
-    return View::make('main');
-
-});*/
 
 Route::get('logout', 'loginController@logout');
+
+
+
+//BORRAR
 
 //Mantenimiento de Datos -> Mantenimiento de activos
 Route::get('md/main', 'mantenimientosController@main');

@@ -74,8 +74,6 @@
             //cambiar nombre del titulo del formulario
             $("#tituloForm").html('Editar Datos');
             $("#submitir").val('OK');
-            //$("#id_oferta").val(oferta.id_oferta);
-            //$("#id_usuario").val(oferta.id_usuario);
           }
         });
 	}
@@ -179,16 +177,9 @@
 <form role="form" class="form-horizontal" id="productForm" name="productForm" action="{{ URL::asset('ofertas') }}" method="post">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-<!--    <div class="row">
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="id_oferta">Id Oferta:</label><input type="text" class="form-control" id="id_oferta" name="id_oferta" maxlength="4">
-            </div>
-        </div>
-    </div>-->
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="oferta">Oferta:</label><input type="text" class="form-control" id="oferta" name="oferta" maxlength="255">
             </div>
@@ -196,16 +187,16 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="form-group">
                 <label for="descripcion">Descripcion:</label>
-                <textarea class="form-control" rows="2" name="descripcion" id="descripcion"></textarea>
+                <textarea class="form-control" rows="4" name="descripcion" id="descripcion"></textarea>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="empresa">Empresa:</label><input type="text" class="form-control" id="empresa" name="empresa" maxlength="50">
             </div>
@@ -213,15 +204,14 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="form-group">
                 <label for="telefono">Telefono:</label><input type="text" class="form-control" id="telefono" name="telefono" maxlength="50">
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5">
             <div class="form-group">
                 <label for="email">Email:</label><input type="text" class="form-control" id="email" name="email" maxlength="50">
             </div>
@@ -229,7 +219,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-11">
             <div class="form-group">
                 <label for="url">url:</label><input type="text" class="form-control" id="url" name="url" maxlength="50">
             </div>
