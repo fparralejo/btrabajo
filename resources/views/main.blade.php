@@ -40,6 +40,7 @@
                 { "sType": 'string' },
                 { "sType": 'string' },
                 { "sType": 'string' },
+                { "sType": 'none' },
                 { "sType": 'none' }
             ],                    
             "bJQueryUI":true,
@@ -71,6 +72,7 @@
             $("#jornada").val(oferta.jornada);
             $("#salario").val(oferta.salario);
             $("#fecha").val(oferta.fecha);
+            $("#cv_pdf").val(oferta.cv_pdf);
             //cambiar nombre del titulo del formulario
             $("#tituloForm").html('Editar Datos');
             $("#submitir").val('OK');
@@ -132,6 +134,7 @@
             <th>Jornada</th>
             <th>Salario</th>
             <th>Fecha</th>
+            <th>PDF</th>
             <th></th>
         </tr>
     </thead>
@@ -154,6 +157,7 @@
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->jornada }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->salario }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->fecha }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->cv_pdf }}</td>
             <td>
                 <button type="button" onclick="borrarOferta({{ $oferta->id_oferta }})" class="btn btn-xs btn-danger">Borrar</button>
             </td>
@@ -181,7 +185,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="oferta">Oferta:</label><input type="text" class="form-control" id="oferta" name="oferta" maxlength="255">
+                <label for="oferta">Oferta:</label><input type="text" class="form-control" id="oferta" name="oferta" maxlength="100">
             </div>
         </div>
     </div>
@@ -198,7 +202,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="empresa">Empresa:</label><input type="text" class="form-control" id="empresa" name="empresa" maxlength="50">
+                <label for="empresa">Empresa:</label><input type="text" class="form-control" id="empresa" name="empresa" maxlength="75">
             </div>
         </div>
     </div>
@@ -206,14 +210,14 @@
     <div class="row">
         <div class="col-md-5">
             <div class="form-group">
-                <label for="telefono">Telefono:</label><input type="text" class="form-control" id="telefono" name="telefono" maxlength="50">
+                <label for="telefono">Telefono:</label><input type="text" class="form-control" id="telefono" name="telefono" maxlength="20">
             </div>
         </div>
         <div class="col-md-1">
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                <label for="email">Email:</label><input type="text" class="form-control" id="email" name="email" maxlength="50">
+                <label for="email">Email:</label><input type="text" class="form-control" id="email" name="email" maxlength="100">
             </div>
         </div>
     </div>
@@ -221,7 +225,7 @@
     <div class="row">
         <div class="col-md-11">
             <div class="form-group">
-                <label for="url">url:</label><input type="text" class="form-control" id="url" name="url" maxlength="50">
+                <label for="url">url:</label><input type="text" class="form-control" id="url" name="url" maxlength="200">
             </div>
         </div>
     </div>
@@ -229,7 +233,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="tipo_contrato">tipo_contrato:</label><input type="text" class="form-control" id="tipo_contrato" name="tipo_contrato" maxlength="50">
+                <label for="tipo_contrato">tipo_contrato:</label><input type="text" class="form-control" id="tipo_contrato" name="tipo_contrato" maxlength="30">
             </div>
         </div>
     </div>
@@ -237,7 +241,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="duracion">duracion:</label><input type="text" class="form-control" id="duracion" name="duracion" maxlength="50">
+                <label for="duracion">duracion:</label><input type="text" class="form-control" id="duracion" name="duracion" maxlength="25">
             </div>
         </div>
     </div>
@@ -245,7 +249,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="jornada">jornada:</label><input type="text" class="form-control" id="jornada" name="jornada" maxlength="50">
+                <label for="jornada">jornada:</label><input type="text" class="form-control" id="jornada" name="jornada" maxlength="25">
             </div>
         </div>
     </div>
@@ -253,7 +257,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="salario">salario:</label><input type="text" class="form-control" id="salario" name="salario" maxlength="50">
+                <label for="salario">salario:</label><input type="text" class="form-control" id="salario" name="salario" maxlength="20">
             </div>
         </div>
     </div>
@@ -261,11 +265,20 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="fecha">fecha:</label><input type="text" class="form-control" id="fecha" name="fecha" maxlength="50">
+                <label for="fecha">Fecha:</label><input type="text" class="form-control" id="fecha" name="fecha" maxlength="50">
             </div>
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-4">
+            <label for="cv_pdf">CV PDF:</label>
+            <select class="form-control" id="cv_pdf" name="cv_pdf">
+                <option value=""></option>
+                <option value="CV01.pdf">CV 01</option>
+            </select>
+        </div>
+    </div>
     <br/>
 
 
