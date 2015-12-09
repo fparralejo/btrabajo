@@ -23,7 +23,13 @@
                 "sInfo": "Ver _START_ al _END_ de _TOTAL_ Registros",
                 "sInfoEmpty": "Ver 0 al 0 de 0 registros",
                 "sInfoFiltered": "(filtrados _MAX_ total registros)",
-                "sSearch": "Busqueda:"
+                "sSearch": "Busqueda:",
+                "oPaginate": { 
+                    "sLast": "Última página", 
+                    "sFirst": "Primera", 
+                    "sNext": "Siguiente", 
+                    "sPrevious": "Anterior" 
+                }
             },
             "bSort":true,
             "aaSorting": [[ 0, "asc" ]],
@@ -104,7 +110,13 @@
 	    setTimeout(function() {
 	        $("#accionTabla2").fadeOut(1500);
 	    },3000);
-	});	
+	});
+
+
+        function verPDF(pdf){
+            window.open('{{ URL::asset('pdf_cv') }}/'+pdf, '', 'scrollbars=yes,menubar=no,height=600,width=800,resizable=yes,toolbar=no,status=no,location=no');
+        }
+        
 </script>
 
 <h3>Ofertas</h3>
@@ -156,8 +168,8 @@
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->duracion }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->jornada }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->salario }}</td>
-            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->fecha }}</td>
-            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->cv_pdf }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$oferta->fecha)->format('d/m/Y') }}</td>
+            <td><a href="#" onclick="verPDF('{{ $oferta->cv_pdf }}');">{{ $oferta->cv_pdf }}</a></td>
             <td>
                 <button type="button" onclick="borrarOferta({{ $oferta->id_oferta }})" class="btn btn-xs btn-danger">Borrar</button>
             </td>
@@ -231,15 +243,14 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="form-group">
                 <label for="tipo_contrato">tipo_contrato:</label><input type="text" class="form-control" id="tipo_contrato" name="tipo_contrato" maxlength="30">
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5">
             <div class="form-group">
                 <label for="duracion">duracion:</label><input type="text" class="form-control" id="duracion" name="duracion" maxlength="25">
             </div>
@@ -247,15 +258,14 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="form-group">
                 <label for="jornada">jornada:</label><input type="text" class="form-control" id="jornada" name="jornada" maxlength="25">
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5">
             <div class="form-group">
                 <label for="salario">salario:</label><input type="text" class="form-control" id="salario" name="salario" maxlength="20">
             </div>
@@ -263,19 +273,62 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="form-group">
-                <label for="fecha">Fecha:</label><input type="text" class="form-control" id="fecha" name="fecha" maxlength="50">
+                <script language="JavaScript">
+//                jQuery(function($){
+//                   $.datepicker.regional['es'] = {
+//                      closeText: 'Cerrar',
+//                      prevText: '&#x3c;Ant',
+//                      nextText: 'Sig&#x3e;',
+//                      currentText: 'Hoy',
+//                      monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+//                      monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+//                      dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+//                      dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+//                      dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+//                      weekHeader: 'Sm',
+//                      dateFormat: 'dd/mm/yy',
+//                      firstDay: 1,
+//                      isRTL: false,
+//                      showMonthAfterYear: false,
+//                      yearSuffix: ''};
+//                   $.datepicker.setDefaults($.datepicker.regional['es']);
+//                });
+
+                $(function() {
+                        $("#fecha").datepicker({
+                            closeText: 'Cerrar',
+                            prevText: '&#x3c;Ant',
+                            nextText: 'Sig&#x3e;',
+                            currentText: 'Hoy',
+                            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+                            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+                            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+                            weekHeader: 'Sm',
+                            format: 'dd/mm/yyyy',
+                            firstDay: 1,
+                            isRTL: false,
+                            showMonthAfterYear: false,
+                            yearSuffix: '',
+                            changeMonth: true, 
+                            changeYear: true 
+                        });
+                });
+                </script>
+                <label for="fecha">Fecha:</label>
+                <input type="text" class="form-control" id="fecha" name="fecha"  maxlength="38">
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5">
             <label for="cv_pdf">CV PDF:</label>
             <select class="form-control" id="cv_pdf" name="cv_pdf">
                 <option value=""></option>
-                <option value="CV01.pdf">CV 01</option>
+                <option value="CV01.pdf">CV01.pdf</option>
             </select>
         </div>
     </div>

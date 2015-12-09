@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css">
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></script>
     <script type="text/javascript" language="javascript" src="//cdn.datatables.net/responsive/1.0.0/js/dataTables.responsive.min.js"></script>
+    <script src="{{URL::asset('lib/datepicker/js/bootstrap-datepicker.js')}}"></script>
     
     <link rel="stylesheet" href="{{URL::asset('css/formValidation.min.css')}}">
     <script src="{{URL::asset('js/formValidation.min.js')}}"></script>
