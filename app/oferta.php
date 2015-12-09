@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class oferta extends Model {
 
-	protected $table = 'ofertas';
+	protected $table = 'bt_ofertas';
 
 	protected $primaryKey = "id_oferta";
 

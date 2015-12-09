@@ -110,7 +110,7 @@ class ofertasController extends Controller {
                 return redirect('/')->with('login_errors', '<font color="#ff0000">La sesión a expirado. Vuelva a logearse..</font>');
             }
             
-            $listado = \DB::table('ofertas')->where("id_usuario","=",Session::get('id'))
+            $listado = oferta::where("id_usuario","=",Session::get('id'))
                                             ->where("estado","=","1")
                                             ->get();
             //var_dump($listado);die;

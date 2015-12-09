@@ -99,82 +99,79 @@ class seguimientoController extends Controller {
                 return redirect('/')->with('login_errors', '<font color="#ff0000">La sesión a expirado. Vuelva a logearse..</font>');
             }
             
-            $listado = \DB::table('seguimientos')->where("id_oferta","=",$id_oferta)
+            $listado = seguimiento::where("id_oferta","=",$id_oferta)
+                                                 ->where("estado","=","1")
                                                  ->get();
             //var_dump($listado);die;
             
-            return view('seguimiento/main')->with('listado',$listado); 
+            return view('seguimiento/main')->with('listado',$listado)->with('id_oferta',$id_oferta); 
         }
 
-//        //OK
-//	public function ofertasShow()
-//        {
-//            $oferta = oferta::find(Input::get('id_oferta'));
-//            
-//            //cambio el formato de la fecha
-//            $oferta->fecha = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$oferta->fecha)->format('d/m/Y');
-//
-//            //devuelvo la respuesta al send
-//            echo json_encode($oferta);
-//        }
-//
-//        //OK
-//	public function ofertasDelete(){
-//            $oferta = oferta::find(Input::get('id_oferta'));
-//            $IdOferta = $oferta->id_oferta;
-//
-//            $oferta->estado = "0";
-//
-//            if($oferta->save()){
-//                echo "Oferta ". $IdOferta ." borrada correctamente.";
-//            }else{
-//                echo "Oferta ". $IdOferta ." NO ha sido borrada.";
-//            }
-//	}
-//        
-//        //OK
-//        public function ofertasCreateEdit(Request $request){
-//            //si es nuevo este valor viene vacio
-//            if($request->id_oferta === ""){
-//                $oferta = new oferta();
-//                $ok = 'Se ha dado de alta correctamente la oferta.';
-//                $error = 'ERROR al dar de alta la oferta.';
-//            }
-//            //sino se edita este id_oferta
-//            else{
-//                $oferta = oferta::find($request->id_oferta);
-//                $ok = 'Se ha editado correctamente la oferta.';
-//                $error = 'ERROR al edtar la oferta.';
-//            }
-//
-//            $oferta->id_oferta = $request->id_oferta;
-//            $oferta->oferta = $request->oferta;
-//            $oferta->descripcion = $request->descripcion;
-//            $oferta->empresa = $request->empresa;
-//            $oferta->telefono = $request->telefono;
-//            $oferta->email = $request->email;
-//            $oferta->url = $request->url;
-//            $oferta->tipo_contrato = $request->tipo_contrato;
-//            $oferta->duracion = $request->duracion;
-//            $oferta->jornada = $request->jornada;
-//            $oferta->salario = $request->salario;
-//            
-//            $fecha = \Carbon\Carbon::createFromFormat('d/m/Y',$request->fecha)->format('Y-m-d H:i:s');
-//            $oferta->fecha = $fecha;
-//            
-//            $oferta->cv_pdf = $request->cv_pdf;
-//            $oferta->id_usuario = Session::get('id');
-//            $oferta->estado = "1";
-//
-//            //var_dump($oferta);die;
-//            
-//            if($oferta->save()){
-//                return redirect('ofertas')->with('errors', $ok);
-//            }else{
-//                return redirect('ofertas')->with('errors', $error);
-//            }
-//        }
-//        
+        //OK
+	public function seguimientoShow()
+        {
+            $seguimiento = seguimiento::find(Input::get('id_seguimiento'));
+            
+            //cambio el formato de la fecha
+            $seguimiento->fecha = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$seguimiento->fecha)->format('d/m/Y');
+
+            //devuelvo la respuesta al send
+            echo json_encode($seguimiento);
+        }
+
+        //OK
+	public function seguimientoDelete(){
+            $seguimiento = seguimiento::find(Input::get('id_seguimiento'));
+            $IdSeg = $seguimiento->id_seguimiento;
+
+            $seguimiento->estado = "0";
+
+            if($seguimiento->save()){
+                echo "Seguimiento ". $IdSeg ." borrado correctamente.";
+            }else{
+                echo "Seguimiento ". $IdSeg ." NO ha sido borrado.";
+            }
+	}
+        
+        //OK
+        public function seguimientoCreateEdit(Request $request){
+            //echo $request->id_seguimiento;die;
+            
+            //si es nuevo este valor viene vacio
+            if($request->id_seguimiento === ""){
+                $seguimiento = new seguimiento();
+                $ok = 'Se ha dado de alta correctamente el seguimiento.';
+                $error = 'ERROR al dar de alta el seguimiento.';
+            }
+            //sino se edita este id_oferta
+            else{
+                $seguimiento = seguimiento::find($request->id_seguimiento);
+                $ok = 'Se ha editado correctamente el seguimiento.';
+                $error = 'ERROR al edtar el seguimiento.';
+            }
+
+            //$seguimiento->id_seguimiento = $request->id_seguimiento;
+
+            $fecha = \Carbon\Carbon::createFromFormat('d/m/Y',$request->fecha)->format('Y-m-d H:i:s');
+            $seguimiento->fecha = $fecha;
+            
+            $seguimiento->tipo = $request->tipo;
+            $seguimiento->contacto = $request->contacto;
+            $seguimiento->telefono = $request->telefono;
+            $seguimiento->email = $request->email;
+            $seguimiento->seguimiento = $request->seguimiento1;
+            $seguimiento->id_oferta = $request->id_oferta;
+            $seguimiento->estado = "1";
+
+            //var_dump($seguimiento);die;
+            
+            if($seguimiento->save()){
+                return redirect('seguimiento/'.$request->id_oferta)->with('errors', $ok);
+            }else{
+                return redirect('seguimiento/'.$request->id_oferta)->with('errors', $error);
+            }
+        }
+        
         
 
 	

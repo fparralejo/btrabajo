@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{URL::asset('favicon.ico')}}">
 
-    <title>SGSI Qualidad</title>
+    <title>Buscar Trabajo</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

@@ -109,10 +109,7 @@
 
 	function ofertaSeguimiento(id_oferta){
             //vamos a la views de seguimiento con esta oferta
-//            setTimeout(function ()
-//            {
             document.location.href="{{URL::to('seguimiento')}}/"+id_oferta;
-//            }, 1000);
 	}
 
 	//hacer desaparecer en cartel
@@ -166,7 +163,7 @@
     @foreach ($listado as $oferta)
     <?php
     //carga los datos en el formulario para editarlos
-    $url="javascript:leerOferta('$oferta->id_oferta');";
+    $url="javascript:leerOferta(".$oferta->id_oferta.");";
     ?>
         <tr>
 <!--            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->id_oferta }}</td>-->
