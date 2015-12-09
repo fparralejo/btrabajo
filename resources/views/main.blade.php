@@ -47,6 +47,8 @@
                 { "sType": 'string' },
                 { "sType": 'string' },
                 { "sType": 'none' },
+                { "sType": 'none' },
+                { "sType": 'none' },
                 { "sType": 'none' }
             ],                    
             "bJQueryUI":true,
@@ -87,22 +89,30 @@
 	}
 
 	function borrarOferta(id_oferta){
-        if (confirm("¿Desea borrar la oferta?"))
-        {
-	        $.ajax({
-	          data:{"id_oferta":id_oferta},  
-	          url: '{{ URL::asset("ofertas/delete") }}',
-	          type:"get",
-	          success: function(data) {
-	          	$('#accionTabla').html(data);
-	          	$('#accionTabla').show();
-	          }
-	        });
-	        setTimeout(function ()
-	        {
-	            document.location.href="{{URL::to('ofertas')}}";
-	        }, 1000);
-        }
+            if (confirm("¿Desea borrar la oferta?"))
+            {
+                $.ajax({
+                  data:{"id_oferta":id_oferta},  
+                  url: '{{ URL::asset("ofertas/delete") }}',
+                  type:"get",
+                  success: function(data) {
+                        $('#accionTabla').html(data);
+                        $('#accionTabla').show();
+                  }
+                });
+                setTimeout(function ()
+                {
+                    document.location.href="{{URL::to('ofertas')}}";
+                }, 1000);
+            }
+	}
+
+	function ofertaSeguimiento(id_oferta){
+            //vamos a la views de seguimiento con esta oferta
+//            setTimeout(function ()
+//            {
+            document.location.href="{{URL::to('seguimiento')}}/"+id_oferta;
+//            }, 1000);
 	}
 
 	//hacer desaparecer en cartel
@@ -148,6 +158,8 @@
             <th>Fecha</th>
             <th>PDF</th>
             <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -172,6 +184,12 @@
             <td><a href="#" onclick="verPDF('{{ $oferta->cv_pdf }}');">{{ $oferta->cv_pdf }}</a></td>
             <td>
                 <button type="button" onclick="borrarOferta({{ $oferta->id_oferta }})" class="btn btn-xs btn-danger">Borrar</button>
+            </td>
+            <td>
+                <button type="button" onclick="ofertaSeguimiento({{ $oferta->id_oferta }})" class="btn btn-xs btn-success">Seguimiento</button>
+            </td>
+            <td>
+                <button type="button" onclick="ofertaEntrevistas({{ $oferta->id_oferta }})" class="btn btn-xs btn-success">Entrevistas</button>
             </td>
         </tr>
     @endforeach

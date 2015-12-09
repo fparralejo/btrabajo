@@ -37,6 +37,12 @@ Route::post('ofertas', 'ofertasController@ofertasCreateEdit');
 
 Route::get('logout', 'loginController@logout');
 
+//seguimiento
+Route::get('seguimiento/{id_oferta}', 'seguimientoController@main');
+//Route::get('seguimiento/listar', 'seguimientoController@listado');
+
+
+
 
 
 //BORRAR

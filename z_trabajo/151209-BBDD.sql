@@ -64,10 +64,10 @@ CREATE TABLE IF NOT EXISTS `ofertas` (
   PRIMARY KEY (`id_oferta`)
 ) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla btrabajo.ofertas: 21 rows
+-- Volcando datos para la tabla btrabajo.ofertas: 23 rows
 /*!40000 ALTER TABLE `ofertas` DISABLE KEYS */;
 INSERT INTO `ofertas` (`id_oferta`, `oferta`, `descripcion`, `empresa`, `telefono`, `email`, `url`, `tipo_contrato`, `duracion`, `jornada`, `salario`, `fecha`, `cv_pdf`, `id_usuario`, `estado`) VALUES
-	(2, 'Mr.', 'Repellendus nihil adipisci aperiam ut illo ea iure deleniti ut quis cupiditate similique harum alias repellat et sed earum voluptatibus ex quasi quidem.', 'Okuneva-Grimes', '(449)462-2874x0794', 'Rowe.Diego@Koepp.com', 'https://www.Lynch.org/inventore-ipsum-omnis-consectetur-eaque-quia-quae', 'New Noemiefort', 'Quo sint quibusdam volupt', 'Voluptates impedit quos q', 'Et voluptas minima e', '1987-02-27 04:02:12', 'CV01.pdf', 1, 1);
+	(2, 'N02', 'Repellendus nihil adipisci aperiam ut illo ea iure deleniti ut quis cupiditate similique harum alias repellat et sed earum voluptatibus ex quasi quidem.', 'Okuneva-Grimes', '(449)462-2874x0794', 'Rowe.Diego@Koepp.com', 'https://www.Lynch.org/inventore-ipsum-omnis-consectetur-eaque-quia-quae', 'New Noemiefort', 'Quo sint quibusdam volupt', 'Voluptates impedit quos q', 'Et voluptas minima e', '1987-02-27 04:02:12', 'CV01.pdf', 1, 1);
 INSERT INTO `ofertas` (`id_oferta`, `oferta`, `descripcion`, `empresa`, `telefono`, `email`, `url`, `tipo_contrato`, `duracion`, `jornada`, `salario`, `fecha`, `cv_pdf`, `id_usuario`, `estado`) VALUES
 	(3, 'informatico becario de goma', 'Ab esse cupiditate laborum earum non consequatur rerum eum architecto fugiat aut eius', 'Waters and Sons', '762.054.3023', 'Price.Richie@Watsica.com', 'http://www.Rice.info/autem-aut-autem-ea-et-ut-quia-veritatis', 'East Mervinmouth', 'Iure ad nemo enim quas nu', 'Unde ut dignissimos corpo', 'Est totam laboriosam', '1973-11-02 02:44:50', '', 1, 1);
 INSERT INTO `ofertas` (`id_oferta`, `oferta`, `descripcion`, `empresa`, `telefono`, `email`, `url`, `tipo_contrato`, `duracion`, `jornada`, `salario`, `fecha`, `cv_pdf`, `id_usuario`, `estado`) VALUES
@@ -120,17 +120,23 @@ DROP TABLE IF EXISTS `seguimientos`;
 CREATE TABLE IF NOT EXISTS `seguimientos` (
   `id_seguimiento` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `fecha` datetime NOT NULL,
-  `tipo` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo` varchar(25) COLLATE utf8_unicode_ci NOT NULL COMMENT 'llamada, email. etc..',
   `contacto` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `telefono` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `seguimiento` longtext COLLATE utf8_unicode_ci NOT NULL,
   `id_oferta` int(11) NOT NULL,
   PRIMARY KEY (`id_seguimiento`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla btrabajo.seguimientos: 0 rows
+-- Volcando datos para la tabla btrabajo.seguimientos: 1 rows
 /*!40000 ALTER TABLE `seguimientos` DISABLE KEYS */;
+INSERT INTO `seguimientos` (`id_seguimiento`, `fecha`, `tipo`, `contacto`, `telefono`, `email`, `seguimiento`, `id_oferta`) VALUES
+	(1, '2015-12-09 13:22:26', 'llamada', 'Manuel Ramirez', '916563359', 'ffff@rrrr.es', 'adsfa sdfa sdf asdf a sdf', 2);
+INSERT INTO `seguimientos` (`id_seguimiento`, `fecha`, `tipo`, `contacto`, `telefono`, `email`, `seguimiento`, `id_oferta`) VALUES
+	(2, '2015-12-09 13:24:38', 'llamada', 'Juan Lopez', '935689869', 'eeee@wwww.es', 'asdfa sdfasdf asdfasfd asdf asdf asf ', 2);
+INSERT INTO `seguimientos` (`id_seguimiento`, `fecha`, `tipo`, `contacto`, `telefono`, `email`, `seguimiento`, `id_oferta`) VALUES
+	(3, '2015-12-09 13:25:04', 'email', 'Ana Fernandez', '915201478', 'wwww@eeeee.es', 'rrrr r r rrrrrr rrrrrrr rrrr rrrr', 3);
 /*!40000 ALTER TABLE `seguimientos` ENABLE KEYS */;
 
 
