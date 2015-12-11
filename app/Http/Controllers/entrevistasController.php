@@ -8,12 +8,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\loginController;
 
 use App\oferta;
-use App\seguimiento;
+use App\entrevista;
 
 
 use Illuminate\Http\Request;
 
-class seguimientoController extends Controller {
+class entrevistasController extends Controller {
 
 	
 	/**
@@ -100,80 +100,78 @@ class seguimientoController extends Controller {
                 return redirect('/')->with('login_errors', '<font color="#ff0000">La sesión a expirado. Vuelva a logearse..</font>');
             }
             
-            $listado = seguimiento::where("id_oferta","=",$id_oferta)
+            $listado = entrevista::where("id_oferta","=",$id_oferta)
                                                  ->where("estado","=","1")
                                                  ->get();
             
             $oferta = oferta::where("id_oferta","=",$id_oferta)
                                                  ->where("estado","=","1")
                                                  ->get();
-            //var_dump($oferta);die;
+            //var_dump($listado[0]);die;
             
-            return view('seguimiento/main')->with('listado',$listado)->with('oferta',$oferta); 
+            return view('entrevista/main')->with('listado',$listado)->with('oferta',$oferta); 
         }
 
         //OK
-	public function seguimientoShow()
+	public function entrevistaShow()
         {
-            $seguimiento = seguimiento::find(Input::get('id_seguimiento'));
+            $entrevista = entrevista::find(Input::get('id_entrevista'));
             
             //cambio el formato de la fecha
-            $seguimiento->fecha = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$seguimiento->fecha)->format('d/m/Y');
+            $entrevista->fecha = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$entrevista->fecha)->format('d/m/Y');
 
             //devuelvo la respuesta al send
-            echo json_encode($seguimiento);
+            echo json_encode($entrevista);
         }
 
         //OK
-	public function seguimientoDelete(){
-            $seguimiento = seguimiento::find(Input::get('id_seguimiento'));
-            $IdSeg = $seguimiento->id_seguimiento;
+	public function entrevistaDelete(){
+            $entrevista = entrevista::find(Input::get('id_entrevista'));
+            $IdEntrev = $entrevista->id_entrevista;
 
-            $seguimiento->estado = "0";
+            $entrevista->estado = "0";
 
-            if($seguimiento->save()){
-                echo "Seguimiento ". $IdSeg ." borrado correctamente.";
+            if($entrevista->save()){
+                echo "Entrevista ". $IdEntrev ." borrada correctamente.";
             }else{
-                echo "Seguimiento ". $IdSeg ." NO ha sido borrado.";
+                echo "Entrevista ". $IdEntrev ." NO ha sido borrada.";
             }
 	}
         
         //OK
-        public function seguimientoCreateEdit(Request $request){
-            //echo $request->id_seguimiento;die;
+        public function entrevistaCreateEdit(Request $request){
+            //echo $request->id_entrevista;die;
             
             //si es nuevo este valor viene vacio
-            if($request->id_seguimiento === ""){
-                $seguimiento = new seguimiento();
-                $ok = 'Se ha dado de alta correctamente el seguimiento.';
-                $error = 'ERROR al dar de alta el seguimiento.';
+            if($request->id_entrevista === ""){
+                $entrevista = new entrevista();
+                $ok = 'Se ha dado de alta correctamente la entrevista.';
+                $error = 'ERROR al dar de alta la entrevista.';
             }
             //sino se edita este id_oferta
             else{
-                $seguimiento = seguimiento::find($request->id_seguimiento);
-                $ok = 'Se ha editado correctamente el seguimiento.';
-                $error = 'ERROR al edtar el seguimiento.';
+                $entrevista = entrevista::find($request->id_entrevista);
+                $ok = 'Se ha editado correctamente la entrevista.';
+                $error = 'ERROR al edtar la entrevista.';
             }
 
-            //$seguimiento->id_seguimiento = $request->id_seguimiento;
-
             $fecha = \Carbon\Carbon::createFromFormat('d/m/Y',$request->fecha)->format('Y-m-d H:i:s');
-            $seguimiento->fecha = $fecha;
+            $entrevista->fecha = $fecha;
             
-            $seguimiento->tipo = $request->tipo;
-            $seguimiento->contacto = $request->contacto;
-            $seguimiento->telefono = $request->telefono;
-            $seguimiento->email = $request->email;
-            $seguimiento->seguimiento = $request->seguimiento1;
-            $seguimiento->id_oferta = $request->id_oferta;
-            $seguimiento->estado = "1";
+            $entrevista->lugar = $request->lugar;
+            $entrevista->contacto = $request->contacto;
+            $entrevista->telefono = $request->telefono;
+            $entrevista->email = $request->email;
+            $entrevista->entrevista = $request->entrevista1;
+            $entrevista->id_oferta = $request->id_oferta;
+            $entrevista->estado = "1";
 
-            //var_dump($seguimiento);die;
+            //var_dump($entrevista);die;
             
-            if($seguimiento->save()){
-                return redirect('seguimiento/'.$request->id_oferta)->with('errors', $ok);
+            if($entrevista->save()){
+                return redirect('entrevistas/'.$request->id_oferta)->with('errors', $ok);
             }else{
-                return redirect('seguimiento/'.$request->id_oferta)->with('errors', $error);
+                return redirect('entrevistas/'.$request->id_oferta)->with('errors', $error);
             }
         }
         

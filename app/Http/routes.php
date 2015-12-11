@@ -43,6 +43,11 @@ Route::get('seguimiento/{id_oferta}/show', 'seguimientoController@seguimientoSho
 Route::get('seguimiento/{id_oferta}/delete', 'seguimientoController@seguimientoDelete');
 Route::post('seguimiento', 'seguimientoController@seguimientoCreateEdit');
 
+//entrevistas
+Route::get('entrevistas/{id_oferta}', 'entrevistasController@main');
+Route::get('entrevistas/{id_oferta}/show', 'entrevistasController@entrevistaShow');
+Route::get('entrevistas/{id_oferta}/delete', 'entrevistasController@entrevistaDelete');
+Route::post('entrevistas', 'entrevistasController@entrevistaCreateEdit');
 
 
 

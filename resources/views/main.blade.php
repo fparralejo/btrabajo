@@ -112,6 +112,11 @@
             document.location.href="{{URL::to('seguimiento')}}/"+id_oferta;
 	}
 
+	function ofertaEntrevistas(id_oferta){
+            //vamos a la views de ofertaEntrevistas con esta oferta
+            document.location.href="{{URL::to('entrevistas')}}/"+id_oferta;
+	}
+
 	//hacer desaparecer en cartel
 	$(document).ready(function() {
 	    setTimeout(function() {
@@ -220,7 +225,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="form-group">
-                <label for="descripcion">Descripcion:</label>
+                <label for="descripcion">Descripción:</label>
                 <textarea class="form-control" rows="4" name="descripcion" id="descripcion"></textarea>
             </div>
         </div>
@@ -237,14 +242,14 @@
     <div class="row">
         <div class="col-md-5">
             <div class="form-group">
-                <label for="telefono">Telefono:</label><input type="text" class="form-control" id="telefono" name="telefono" maxlength="20">
+                <label for="telefono">Teléfono:</label><input type="text" class="form-control" id="telefono" name="telefono" maxlength="20">
             </div>
         </div>
         <div class="col-md-1">
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                <label for="email">Email:</label><input type="text" class="form-control" id="email" name="email" maxlength="100">
+                <label for="email">Email:</label><input type="email" class="form-control" id="email" name="email" maxlength="100">
             </div>
         </div>
     </div>
@@ -252,7 +257,7 @@
     <div class="row">
         <div class="col-md-11">
             <div class="form-group">
-                <label for="url">url:</label><input type="text" class="form-control" id="url" name="url" maxlength="200">
+                <label for="url">Url:</label><input type="text" class="form-control" id="url" name="url" maxlength="200">
             </div>
         </div>
     </div>
@@ -260,14 +265,14 @@
     <div class="row">
         <div class="col-md-5">
             <div class="form-group">
-                <label for="tipo_contrato">tipo_contrato:</label><input type="text" class="form-control" id="tipo_contrato" name="tipo_contrato" maxlength="30">
+                <label for="tipo_contrato">Tipo Contrato:</label><input type="text" class="form-control" id="tipo_contrato" name="tipo_contrato" maxlength="30">
             </div>
         </div>
         <div class="col-md-1">
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                <label for="duracion">duracion:</label><input type="text" class="form-control" id="duracion" name="duracion" maxlength="25">
+                <label for="duracion">Duración:</label><input type="text" class="form-control" id="duracion" name="duracion" maxlength="25">
             </div>
         </div>
     </div>
@@ -275,14 +280,14 @@
     <div class="row">
         <div class="col-md-5">
             <div class="form-group">
-                <label for="jornada">jornada:</label><input type="text" class="form-control" id="jornada" name="jornada" maxlength="25">
+                <label for="jornada">Jornada:</label><input type="text" class="form-control" id="jornada" name="jornada" maxlength="25">
             </div>
         </div>
         <div class="col-md-1">
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                <label for="salario">salario:</label><input type="text" class="form-control" id="salario" name="salario" maxlength="20">
+                <label for="salario">Salario:</label><input type="text" class="form-control" id="salario" name="salario" maxlength="20">
             </div>
         </div>
     </div>
@@ -291,26 +296,6 @@
         <div class="col-md-5">
             <div class="form-group">
                 <script language="JavaScript">
-//                jQuery(function($){
-//                   $.datepicker.regional['es'] = {
-//                      closeText: 'Cerrar',
-//                      prevText: '&#x3c;Ant',
-//                      nextText: 'Sig&#x3e;',
-//                      currentText: 'Hoy',
-//                      monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-//                      monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-//                      dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-//                      dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-//                      dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-//                      weekHeader: 'Sm',
-//                      dateFormat: 'dd/mm/yy',
-//                      firstDay: 1,
-//                      isRTL: false,
-//                      showMonthAfterYear: false,
-//                      yearSuffix: ''};
-//                   $.datepicker.setDefaults($.datepicker.regional['es']);
-//                });
-
                 $(function() {
                         $("#fecha").datepicker({
                             closeText: 'Cerrar',

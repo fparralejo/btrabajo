@@ -2,7 +2,7 @@
 
 @section('principal')
 <h2 class="page-header">Buscar Trabajo</h2>
-<h3 class="page-header">Listado Seguimiento Oferta: <b>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$oferta[0]->fecha)->format('d/m/Y') }} - {{ $oferta[0]->oferta }}</b> </h3>
+<h3 class="page-header">Listado Entrevistas Oferta: <b>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$oferta[0]->fecha)->format('d/m/Y') }} - {{ $oferta[0]->oferta }}</b> </h3>
 
 <style>
     .sgsiRow:hover{
@@ -13,7 +13,7 @@
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
-        $('#seguimiento').dataTable({
+        $('#entrevista').dataTable({
         	"responsive": true,
             "bProcessing": true,
             "sPaginationType":"full_numbers",
@@ -49,33 +49,33 @@
 	});
 
 
-	function leerSeguimiento(id_seguimiento,id_oferta){
+	function leerEntrevista(id_entrevista,id_oferta){
             $.ajax({
-              data:{"id_seguimiento":id_seguimiento},  
-              url: "../seguimiento/"+id_oferta+"/show",
+              data:{"id_entrevista":id_entrevista},  
+              url: "../entrevistas/"+id_oferta+"/show",
               type:"get",
               success: function(data) {
-                var seguimiento = JSON.parse(data);
-                $('#id_seguimiento').val(seguimiento.id_seguimiento);
-                $('#fecha').val(seguimiento.fecha);
-                $('#tipo').val(seguimiento.tipo);
-                $('#contacto').val(seguimiento.contacto);
-                $('#telefono').val(seguimiento.telefono);
-                $('#seguimiento1').val(seguimiento.seguimiento);
-                $('#email').val(seguimiento.email);
+                var entrevista = JSON.parse(data);
+                $('#id_entrevista').val(entrevista.id_entrevista);
+                $('#fecha').val(entrevista.fecha);
+                $('#lugar').val(entrevista.lugar);
+                $('#contacto').val(entrevista.contacto);
+                $('#telefono').val(entrevista.telefono);
+                $('#entevista1').val(entrevista.entrevista);
+                $('#email').val(entrevista.email);
                 //cambiar nombre del titulo del formulario
-                $("#tituloForm").html('Editar Seguimiento');
+                $("#tituloForm").html('Editar Entrevista');
                 $("#submitir").val('OK');
               }
             });
 	}
 
-	function borrarSeguimiento(id_seguimiento,id_oferta){
-            if (confirm("¿Desea borrar el seguimiento?"))
+	function borrarEntrevista(id_entrevista,id_oferta){
+            if (confirm("¿Desea borrar la entrevista?"))
             {
                 $.ajax({
-                  data:{"id_seguimiento":id_seguimiento},  
-                  url: "../seguimiento/"+id_oferta+"/delete",
+                  data:{"id_entrevista":id_entrevista},  
+                  url: "../entrevistas/"+id_oferta+"/delete",
                   type:"get",
                   success: function(data) {
                         $('#accionTabla').html(data);
@@ -84,15 +84,11 @@
                 });
                 setTimeout(function ()
                 {
-                    document.location.href="../seguimiento/"+id_oferta;
+                    document.location.href="../entrevistas/"+id_oferta;
                 }, 1000);
             }
 	}
 
-//	function ofertaSeguimiento(id_oferta){
-//            //vamos a la views de seguimiento con esta oferta
-//            document.location.href="{{URL::to('seguimiento/"+id_oferta+"')}}";
-//	}
 
 	//hacer desaparecer en cartel
 	$(document).ready(function() {
@@ -101,11 +97,6 @@
 	    },3000);
 	});
 
-
-//        function verPDF(pdf){
-//            window.open('{{ URL::asset('pdf_cv') }}/'+pdf, '', 'scrollbars=yes,menubar=no,height=600,width=800,resizable=yes,toolbar=no,status=no,location=no');
-//        }
-        
 </script>
 
 
@@ -119,35 +110,34 @@
 </div>
 @endif
 
-<table id="seguimiento" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+<table id="entrevista" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
     <thead>
         <tr>
 <!--            <th>Id</th>-->
             <th>Fecha</th>
-            <th>Tipo</th>
+            <th>Lugar</th>
             <th>Contacto</th>
             <th>Teléfono</th>
             <th>E-mail</th>
-            <th>Seguimiento</th>
+            <th>Entrevista</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-    @foreach ($listado as $seguimiento)
+    @foreach ($listado as $entrevista)
     <?php
     //carga los datos en el formulario para editarlos
-    $url="javascript:leerSeguimiento(".$seguimiento->id_seguimiento.",".$oferta[0]->id_oferta.");";
+    $url="javascript:leerEntrevista(".$entrevista->id_entrevista.",".$oferta[0]->id_oferta.");";
     ?>
         <tr>
-<!--            <td class="sgsiRow" onClick="{{ $url }}">{{ $seguimiento->id_seguimiento }}</td>-->
-            <td class="sgsiRow" onClick="{{ $url }}">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$seguimiento->fecha)->format('d/m/Y') }}</td>
-            <td class="sgsiRow" onClick="{{ $url }}">{{ $seguimiento->tipo }}</td>
-            <td class="sgsiRow" onClick="{{ $url }}">{{ $seguimiento->contacto }}</td>
-            <td class="sgsiRow" onClick="{{ $url }}">{{ $seguimiento->telefono }}</td>
-            <td class="sgsiRow" onClick="{{ $url }}">{{ $seguimiento->email }}</td>
-            <td class="sgsiRow" onClick="{{ $url }}">{{ $seguimiento->seguimiento }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$entrevista->fecha)->format('d/m/Y') }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $entrevista->lugar }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $entrevista->contacto }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $entrevista->telefono }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $entrevista->email }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $entrevista->entrevista }}</td>
             <td>
-                <button type="button" onclick="borrarSeguimiento({{ $seguimiento->id_seguimiento }},{{ $oferta[0]->id_oferta }})" class="btn btn-xs btn-danger">Borrar</button>
+                <button type="button" onclick="borrarEntrevista({{ $entrevista->id_entrevista }},{{ $oferta[0]->id_oferta }})" class="btn btn-xs btn-danger">Borrar</button>
             </td>
         </tr>
     @endforeach
@@ -155,7 +145,7 @@
 </table>
 
 <hr/>
-<h3><span id="tituloForm">Nuevo Seguimiento</span></h3>
+<h3><span id="tituloForm">Nueva Entrevista</span></h3>
 <br/>
 
 <style type="text/css">
@@ -166,7 +156,7 @@
 }
 </style>
 
-<form role="form" class="form-horizontal" id="seguimientoForm" name="seguimientoForm" action="{{ URL::asset('seguimiento') }}" method="post">
+<form role="form" class="form-horizontal" id="entrevistaForm" name="entrevistaForm" action="{{ URL::asset('entrevistas') }}" method="post">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -203,12 +193,9 @@
         <div class="col-md-1">
         </div>
         <div class="col-md-5">
-            <label for="tipo">Tipo:</label>
-            <select class="form-control" id="tipo" name="tipo">
-                <option value=""></option>
-                <option value="llamada">Llamada</option>
-                <option value="email">E-mail</option>
-            </select>
+            <div class="form-group">
+                <label for="lugar">Lugar:</label><input type="text" class="form-control" id="lugar" name="lugar" maxlength="100">
+            </div>
         </div>
     </div>
     
@@ -230,8 +217,8 @@
     <div class="row">
         <div class="col-md-8">
             <div class="form-group">
-                <label for="seguimiento1">Seguimiento:</label>
-                <textarea class="form-control" rows="4" name="seguimiento1" id="seguimiento1"></textarea>
+                <label for="entrevista1">Entrevista:</label>
+                <textarea class="form-control" rows="4" name="entrevista1" id="entrevista1"></textarea>
             </div>
         </div>
     </div>
@@ -250,13 +237,13 @@
 
 
     <input type="hidden" id="id_oferta" name="id_oferta" value="{{ $oferta[0]->id_oferta }}" />
-    <input type="hidden" id="id_seguimiento" name="id_seguimiento" value="" />
+    <input type="hidden" id="id_entrevista" name="id_entrevista" value="" />
     <input type="submit" id="submitir" class="btn btn-default" value="Nuevo"/>
 </form>
 
 <script>
 $(document).ready(function() {
-    $('#seguimientoForm').formValidation({
+    $('#entrevistaForm').formValidation({
         framework: 'bootstrap',
         icon: {
             valid: 'glyphicon glyphicon-ok',
@@ -271,24 +258,24 @@ $(document).ready(function() {
                     }
                 }
             },
-            tipo: {
+            lugar: {
                 validators: {
                     notEmpty: {
-                        message: 'El tipo es requerido'
+                        message: 'El lugar es requerido'
                     }
                 }
             },
-            contacto: {
+//            contacto: {
+//                validators: {
+//                    notEmpty: {
+//                        message: 'El contacto es requerida'
+//                    }
+//                }
+//            },
+            entrevista1: {
                 validators: {
                     notEmpty: {
-                        message: 'El contacto es requerida'
-                    }
-                }
-            },
-            seguimiento1: {
-                validators: {
-                    notEmpty: {
-                        message: 'La descripción del seguimiento es requerida'
+                        message: 'La descripción de la entrevista es requerida'
                     }
                 }
 //            },
