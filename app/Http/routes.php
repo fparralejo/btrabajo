@@ -28,6 +28,7 @@ Route::get('/', function()
 });
 
 Route::post('login', 'loginController@login');
+Route::get('logout', 'loginController@logout');
 
 
 Route::get('ofertas', 'ofertasController@main');
@@ -35,7 +36,6 @@ Route::get('ofertas/show', 'ofertasController@ofertasShow');
 Route::get('ofertas/delete', 'ofertasController@ofertasDelete');
 Route::post('ofertas', 'ofertasController@ofertasCreateEdit');
 
-Route::get('logout', 'loginController@logout');
 
 //seguimiento
 Route::get('seguimiento/{id_oferta}', 'seguimientoController@main');

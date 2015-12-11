@@ -61,7 +61,7 @@
                 $('#lugar').val(entrevista.lugar);
                 $('#contacto').val(entrevista.contacto);
                 $('#telefono').val(entrevista.telefono);
-                $('#entevista1').val(entrevista.entrevista);
+                $('#entrevista1').val(entrevista.entrevista);
                 $('#email').val(entrevista.email);
                 //cambiar nombre del titulo del formulario
                 $("#tituloForm").html('Editar Entrevista');

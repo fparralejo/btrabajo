@@ -351,16 +351,16 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            id_oferta: {
-                validators: {
-                    notEmpty: {
-                        message: 'El Id Oferta es requerido'
-                    },
-                    numeric: {
-                        message: 'El Id Oferta tiene que ser un valor numérico'
-                    }
-                }
-            },
+//            id_oferta: {
+//                validators: {
+//                    notEmpty: {
+//                        message: 'El Id Oferta es requerido'
+//                    },
+//                    numeric: {
+//                        message: 'El Id Oferta tiene que ser un valor numérico'
+//                    }
+//                }
+//            },
             oferta: {
                 validators: {
                     notEmpty: {

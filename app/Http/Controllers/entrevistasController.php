@@ -155,7 +155,12 @@ class entrevistasController extends Controller {
                 $error = 'ERROR al edtar la entrevista.';
             }
 
-            $fecha = \Carbon\Carbon::createFromFormat('d/m/Y',$request->fecha)->format('Y-m-d H:i:s');
+            //compruebo que la fecha no venga vacia, si es asi saco la fecha de hoy
+            $fecha = $request->fecha;
+            if($fecha === ''){
+                $fecha = date('d/m/Y');
+            }
+            $fecha = \Carbon\Carbon::createFromFormat('d/m/Y',$fecha)->format('Y-m-d H:i:s');
             $entrevista->fecha = $fecha;
             
             $entrevista->lugar = $request->lugar;

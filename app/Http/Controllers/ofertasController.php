@@ -145,6 +145,8 @@ class ofertasController extends Controller {
         
         //OK
         public function ofertasCreateEdit(Request $request){
+            //echo "he llegado";die;
+            
             //si es nuevo este valor viene vacio
             if($request->id_oferta === ""){
                 $oferta = new oferta();
@@ -170,7 +172,12 @@ class ofertasController extends Controller {
             $oferta->jornada = $request->jornada;
             $oferta->salario = $request->salario;
             
-            $fecha = \Carbon\Carbon::createFromFormat('d/m/Y',$request->fecha)->format('Y-m-d H:i:s');
+            //compruebo que la fecha no venga vacia, si es asi saco la fecha de hoy
+            $fecha = $request->fecha;
+            if($fecha === ''){
+                $fecha = date('d/m/Y');
+            }
+            $fecha = \Carbon\Carbon::createFromFormat('d/m/Y',$fecha)->format('Y-m-d H:i:s');
             $oferta->fecha = $fecha;
             
             $oferta->cv_pdf = $request->cv_pdf;
