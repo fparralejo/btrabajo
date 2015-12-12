@@ -31,7 +31,7 @@
 
     <div id="container">
     <div id="logo">
-        <span style="color:#FFFFFF;"><center><h2>Trabajo</h2></center></span>	
+        <span style="color:#FFFFFF;"><center><h2>Buscar Trabajo V1.0</h2></center></span>	
     </div>
 
     <div id="loginbox" class="wrapper">          
