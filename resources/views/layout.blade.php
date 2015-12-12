@@ -65,7 +65,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="{{ URL::asset('ofertas') }}">Ofertas</a></li>
-            <li><a href="#">Tareas</a></li>
+            <li><a href="{{ URL::asset('web') }}">Web T.</a></li>
             <li><a href="{{ URL::asset('logout') }}">Salir</a></li>
           </ul>
         </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\loginController;
 
 use App\oferta;
+use App\webtrabajo;
 
 
 use Illuminate\Http\Request;
@@ -113,8 +114,11 @@ class ofertasController extends Controller {
             $listado = oferta::where("id_usuario","=",Session::get('id'))
                                             ->where("estado","=","1")
                                             ->get();
+            
+            $listWebT = webtrabajo::all();
+            
             //var_dump($listado);die;
-            return view('main')->with('listado',$listado); 
+            return view('main')->with('listado',$listado)->with('listWebT',$listWebT); 
         }
 
         //OK
@@ -167,6 +171,7 @@ class ofertasController extends Controller {
             $oferta->telefono = $request->telefono;
             $oferta->email = $request->email;
             $oferta->url = $request->url;
+            $oferta->webtrabajo = $request->webtrabajo;
             $oferta->tipo_contrato = $request->tipo_contrato;
             $oferta->duracion = $request->duracion;
             $oferta->jornada = $request->jornada;

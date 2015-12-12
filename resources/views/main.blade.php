@@ -34,7 +34,7 @@
             "bSort":true,
             "aaSorting": [[ 0, "asc" ]],
             "aoColumns": [
-//                { "sType": 'string' },
+                { "sType": 'string' },
                 { "sType": 'string' },
                 { "sType": 'string' },
                 { "sType": 'string' },
@@ -75,6 +75,7 @@
             $('#telefono').val(oferta.telefono);
             $('#email').val(oferta.email);
             $("#url").val(oferta.url);
+            $('#webtrabajo').val(oferta.webtrabajo);
             $("#tipo_contrato").val(oferta.tipo_contrato);
             $("#duracion").val(oferta.duracion);
             $("#jornada").val(oferta.jornada);
@@ -152,6 +153,7 @@
             <th>Empresa</th>
             <th>Telefono</th>
             <th>E-mail</th>
+            <th>Web T.</th>
             <th>url</th>
             <th>Tipo</th>
             <th>Duracion</th>
@@ -169,6 +171,12 @@
     <?php
     //carga los datos en el formulario para editarlos
     $url="javascript:leerOferta(".$oferta->id_oferta.");";
+    $nombreWebT = '';
+    foreach ($listWebT as $webT) {
+        if($webT->id_web === $oferta->webtrabajo){
+            $nombreWebT = $webT->nombre;
+        }
+    }
     ?>
         <tr>
 <!--            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->id_oferta }}</td>-->
@@ -177,6 +185,7 @@
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->empresa }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->telefono }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->email }}</td>
+            <td class="sgsiRow" onClick="{{ $url }}">{{ $nombreWebT }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->url }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->tipo_contrato }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->duracion }}</td>
@@ -258,6 +267,20 @@
         <div class="col-md-11">
             <div class="form-group">
                 <label for="url">Url:</label><input type="text" class="form-control" id="url" name="url" maxlength="200">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="webtrabajo">Web Trabajo:</label>
+	        <select class="form-control" name="webtrabajo" id="webtrabajo">
+                    <option value=""></option>
+                    @foreach ($listWebT as $webT)
+                    <option value="{{ $webT->id_web }}">{{ $webT->nombre }}</option>
+                    @endforeach
+	        </select>
             </div>
         </div>
     </div>

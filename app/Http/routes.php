@@ -49,26 +49,9 @@ Route::get('entrevistas/{id_oferta}/show', 'entrevistasController@entrevistaShow
 Route::get('entrevistas/{id_oferta}/delete', 'entrevistasController@entrevistaDelete');
 Route::post('entrevistas', 'entrevistasController@entrevistaCreateEdit');
 
+//web trabajo
+Route::get('web', 'webController@main');
+Route::get('web/show', 'webController@webShow');
+Route::get('web/delete', 'webController@webDelete');
+Route::post('web', 'webController@webCreateEdit');
 
-
-
-//BORRAR
-
-//Mantenimiento de Datos -> Mantenimiento de activos
-//Route::get('md/main', 'mantenimientosController@main');
-//
-//Route::get('md/mActivos', 'mantenimientosController@mActivos');
-//Route::get('md/mActivos/show', 'mantenimientosController@mActivosShow');
-//Route::get('md/mActivos/delete', 'mantenimientosController@mActivosDelete');
-//Route::post('md/mActivos', 'mantenimientosController@mActivosCreateEdit');
-//
-//Route::get('md/mAmenazas', 'mantenimientosController@mAmenazas');
-//Route::post('md/mAmenazas', 'mantenimientosController@mAmenazasCreateEdit');
-//Route::get('md/mAmenazas/show', 'mantenimientosController@mAmenazasShow');
-//Route::get('md/mAmenazas/delete', 'mantenimientosController@mAmenazasDelete');
-//
-//Route::get('md/mActAmen', 'mantenimientosController@mActAmen');
-//Route::post('md/mActAmen', 'mantenimientosController@mActAmenEdit');
-//Route::get('md/mActAmen/show', 'mantenimientosController@mActAmenShow');
-
-//NUEVO
