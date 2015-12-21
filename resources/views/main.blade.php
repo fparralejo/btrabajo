@@ -352,6 +352,7 @@
             <select class="form-control" id="cv_pdf" name="cv_pdf">
                 <option value=""></option>
                 <option value="CV01.pdf">CV01.pdf</option>
+                <option value="CV02.pdf">CV02.pdf</option>
             </select>
         </div>
     </div>
