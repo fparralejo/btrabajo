@@ -45,7 +45,6 @@
                 { "sType": 'string' },
                 { "sType": 'string' },
                 { "sType": 'string' },
-                { "sType": 'string' },
                 { "sType": 'none' },
                 { "sType": 'none' },
                 { "sType": 'none' },
@@ -148,8 +147,9 @@
     <thead>
         <tr>
             <!--<th>IdOferta</th>-->
+            <th></th>
+            <th>Fecha</th>
             <th>Oferta</th>
-            <th>Descripción</th>
             <th>Empresa</th>
             <th>Telefono</th>
             <th>E-mail</th>
@@ -159,14 +159,13 @@
             <th>Duracion</th>
             <th>Jornada</th>
             <th>Salario</th>
-            <th>Fecha</th>
             <th>PDF</th>
-            <th></th>
             <th></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
+    <?php //dd($listado);die; ?>
     @foreach ($listado as $oferta)
     <?php
     //carga los datos en el formulario para editarlos
@@ -179,9 +178,21 @@
     }
     ?>
         <tr>
-<!--            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->id_oferta }}</td>-->
+            <td class="sgsiRow" onClick="{{ $url }}">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$oferta->fecha)->format('d/m/Y') }}</td>
+            <td>
+                <?php
+                if($oferta->estado_actual === "1"){
+                ?>
+                <button type="button" onclick="ofertaSeguimiento({{ $oferta->id_oferta }})" class="btn btn-xs btn-success">Seguimiento</button>
+                <?php
+                }else{
+                ?>
+                <button type="button" onclick="" class="btn btn-xs btn-info">Cerrado</button>
+                <?php
+                }
+                ?>
+            </td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->oferta }}</td>
-            <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->descripcion }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->empresa }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->telefono }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->email }}</td>
@@ -191,16 +202,24 @@
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->duracion }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->jornada }}</td>
             <td class="sgsiRow" onClick="{{ $url }}">{{ $oferta->salario }}</td>
-            <td class="sgsiRow" onClick="{{ $url }}">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$oferta->fecha)->format('d/m/Y') }}</td>
             <td><a href="#" onclick="verPDF('{{ $oferta->cv_pdf }}');">{{ $oferta->cv_pdf }}</a></td>
             <td>
+                <?php
+                if($oferta->estado_actual === "1"){
+                ?>
                 <button type="button" onclick="borrarOferta({{ $oferta->id_oferta }})" class="btn btn-xs btn-danger">Borrar</button>
+                <?php
+                }
+                ?>
             </td>
             <td>
-                <button type="button" onclick="ofertaSeguimiento({{ $oferta->id_oferta }})" class="btn btn-xs btn-success">Seguimiento</button>
-            </td>
-            <td>
+                <?php
+                if($oferta->estado_actual === "1"){
+                ?>
                 <button type="button" onclick="ofertaEntrevistas({{ $oferta->id_oferta }})" class="btn btn-xs btn-success">Entrevistas</button>
+                <?php
+                }
+                ?>
             </td>
         </tr>
     @endforeach
