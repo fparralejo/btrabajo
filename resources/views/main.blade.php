@@ -372,6 +372,7 @@
                 <option value=""></option>
                 <option value="CV01.pdf">CV01.pdf</option>
                 <option value="CV02.pdf">CV02.pdf</option>
+                <option value="CV03.pdf">CV03.pdf</option>
             </select>
         </div>
     </div>
